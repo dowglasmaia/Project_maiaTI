@@ -11,6 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+/**
+ * @author Dowglas Maia Skype: live:dowglasmaia E-mail:dowglasmaia@live.com
+ *         Linkedin: www.linkedin.com/in/dowglasmaia
+ */
+
 @Entity
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -24,7 +29,12 @@ public class Usuario implements Serializable {
 	private String nome;
 
 	@NotNull
+	private String login;
+
+	@NotNull
 	private String senha;
+
+	private String token;
 
 	@ManyToOne
 	private Cargo cargo;
@@ -33,12 +43,14 @@ public class Usuario implements Serializable {
 
 	}
 
-	public Usuario(Long id, String nome, String senha, Cargo cargo) {
+	public Usuario(Long id, String nome, String login, String senha, Cargo cargo) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.login = login;
 		this.senha = senha;
 		this.cargo = cargo;
+
 	}
 
 	public Long getId() {
@@ -57,12 +69,28 @@ public class Usuario implements Serializable {
 		this.nome = nome;
 	}
 
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
 	public String getSenha() {
 		return senha;
 	}
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	public Cargo getCargo() {
