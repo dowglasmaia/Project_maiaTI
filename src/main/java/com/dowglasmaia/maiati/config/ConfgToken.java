@@ -2,8 +2,6 @@ package com.dowglasmaia.maiati.config;
 
 import java.util.Date;
 
-import org.springframework.context.annotation.Configuration;
-
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -12,7 +10,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
  * 
  */
 
-@Configuration
 public class ConfgToken {
 
 	private static String CHAVE = "maia-chave-token";

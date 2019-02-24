@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
 
 /**
@@ -22,7 +21,6 @@ import org.springframework.web.filter.GenericFilterBean;
  * verifica se o token e valido ou não
  */
 
-@Component
 public class JWTFilter extends GenericFilterBean {
 
 	@Override
@@ -44,7 +42,7 @@ public class JWTFilter extends GenericFilterBean {
 				SecurityContextHolder.getContext().setAuthentication(authentication);
 			}
 
-			chain.doFilter(request, response); // se tudo estiver ok continua libera a requisição
+			chain.doFilter(request, response); 
 
 		} catch (Exception e) {
 			// caso aja o erro de autenticação

@@ -1,23 +1,22 @@
 package com.dowglasmaia.maiati.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+/**
+ * @author Dowglas Maia Skype: live:dowglasmaia E-mail:dowglasmaia@live.com
+ *         Linkedin: www.linkedin.com/in/dowglasmaia
+ */
 
 @Entity
-public class Departamento implements Serializable {
+public class Funcionario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -28,19 +27,24 @@ public class Departamento implements Serializable {
 	@NotBlank
 	private String nome;
 
-	@JsonIgnore
-	@ManyToMany
-	@JoinTable(name = "cargo_departamento", joinColumns = @JoinColumn(name = "departamento_id"), inverseJoinColumns = @JoinColumn(name = "cargo_id"))
-	private List<Cargo> cargos = new ArrayList<>();
+	@NotNull
+	private String login;
 
-	public Departamento() {
+	@NotNull
+	private String senha;
+
+	private String token;
+
+	public Funcionario() {
 
 	}
 
-	public Departamento(Long id, String nome) {
+	public Funcionario(Long id, @NotBlank String nome, @NotNull String login, @NotNull String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.login = login;
+		this.senha = senha;
 	}
 
 	public Long getId() {
@@ -59,8 +63,28 @@ public class Departamento implements Serializable {
 		this.nome = nome;
 	}
 
-	public List<Cargo> getCargos() {
-		return cargos;
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	@Override
@@ -79,7 +103,7 @@ public class Departamento implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Departamento other = (Departamento) obj;
+		Funcionario other = (Funcionario) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

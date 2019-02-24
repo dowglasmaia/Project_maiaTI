@@ -21,7 +21,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled=true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -32,7 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable();
 		http.csrf().disable().authorizeRequests() 
 				.antMatchers("/login").permitAll()
-				.antMatchers("/error").permitAll()				
+				.antMatchers("/error").permitAll()	
+				.antMatchers("/usuarios/**").permitAll()  //provisorio
 				.anyRequest().authenticated()
 				.and()
 				.addFilterBefore(new SecurityAuthentication("/login", authenticationManager()),
