@@ -8,14 +8,20 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 /**
- * @author Dowglas Maia Skype: live:dowglasmaia E-mail:dowglasmaia@live.com
- *         Linkedin: www.linkedin.com/in/dowglasmaia
+ * @author Dowglas Maia 
+ * Skype: live:dowglasmaia 
+ * E-mail:dowglasmaia@live.com
+ *Linkedin: www.linkedin.com/in/dowglasmaia
  * 
- *         Repositorio Generico
+ *Repositorio Generico
  * 
  */
 
+@Repository
 public abstract class AbstractRepo<T, PK extends Serializable> {
 
 	// Metodo auxilar para Consultas Genericas, Recuperando a Class de Instancia
@@ -26,21 +32,27 @@ public abstract class AbstractRepo<T, PK extends Serializable> {
 	/* Instanciando um EntityManager */
 	@PersistenceContext
 	protected EntityManager manager;
+
 	public EntityManager getManager() {
 		return manager;
 	}
 
 	/* salvar */
-	public void save(T obj) {
+	@Transactional(rollbackFor = { Exception.class })
+	public T save(T obj) {
 		manager.persist(obj);
+		return obj;
 	}
 
 	/* Atualizar */
-	public void update(T obj) {
+	@Transactional(rollbackFor = { Exception.class })
+	public T update(T obj) {
 		manager.merge(obj);
+		return obj;
 	}
 
 	/* Deletar */
+	@Transactional(rollbackFor = { Exception.class })
 	public void delete(PK id) {
 		manager.remove(manager.getReference(entidadeClass, id));
 	}
