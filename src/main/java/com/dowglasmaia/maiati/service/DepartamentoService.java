@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import com.dowglasmaia.maiati.domain.Departamento;
 import com.dowglasmaia.maiati.repository.domain.DepartamentoRepository;
 
-import javassist.NotFoundException;
-
 @Service
 public class DepartamentoService {
 
@@ -39,14 +37,10 @@ public class DepartamentoService {
 	}
 
 	/* Delete */
-	public void remove(Long id) {
-		try {
-			buscarPorID(id);
-			repository.delete(id);
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
+	public void remove(Long id) throws Exception{
+		Departamento dep = new Departamento();
+		dep.setId(id);
+		repository.delete(id);
 
 	}
 

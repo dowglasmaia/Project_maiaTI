@@ -57,8 +57,11 @@ public class DepartamentoController {
 
 	/* Endpoint - Delete */
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		service.remove(id);
-		return ResponseEntity.noContent().build();
+	public void delete(@PathVariable Long id) {
+		try {
+			service.remove(id);
+		} catch (Exception e) {
+			throw new NoSuchElementException("O Operação Não realizada!");
+		}
 	}
 }
