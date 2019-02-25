@@ -9,14 +9,12 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 /**
- * @author Dowglas Maia
- * Skype: live:dowglasmaia
- * E-mail:dowglasmaia@live.com
- * Linkedin: www.linkedin.com/in/dowglasmaia
+ * @author Dowglas Maia Skype: live:dowglasmaia E-mail:dowglasmaia@live.com
+ *         Linkedin: www.linkedin.com/in/dowglasmaia
  * 
- * Repositorio Generico
+ *         Repositorio Generico
  * 
- * */
+ */
 
 public abstract class AbstractRepo<T, PK extends Serializable> {
 
@@ -27,8 +25,10 @@ public abstract class AbstractRepo<T, PK extends Serializable> {
 
 	/* Instanciando um EntityManager */
 	@PersistenceContext
-	private EntityManager manager;
-	
+	protected EntityManager manager;
+	public EntityManager getManager() {
+		return manager;
+	}
 
 	/* salvar */
 	public void save(T obj) {
