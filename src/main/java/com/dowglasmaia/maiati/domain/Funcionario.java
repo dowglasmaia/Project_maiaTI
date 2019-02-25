@@ -40,39 +40,28 @@ public class Funcionario implements Serializable {
 	@Column(length = 100)
 	@NotBlank(message = "Campo Obrogatório")
 	private String nome;
-	
+
 	@NotNull(message = "Campo Obrogatório")
 	@PastOrPresent(message = "A Data Não Pode Ser Posterior ao Dia de Hoje. ")
-	@DateTimeFormat(iso= ISO.DATE)
+	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataAdmissao;
-	
-	@DateTimeFormat(iso= ISO.DATE)
+
+	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataDemissao;
-	
-	
+
 	@NotNull(message = "Campo Obrogatório")
-	@NumberFormat(style = Style.CURRENCY, pattern ="#,##0.00")
+	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal salario;
-	
+
 	@NotNull(message = "Campo Obrogatório")
 	@ManyToOne
 	private Cargo cargo;
-	
+
 	@Valid
 	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
-	
 
-	@NotNull
-	private String login;
-
-	@NotNull
-	private String senha;
-
-	private String token;
-
-		
 	// ======== Getters e Setters ================//
 	public Long getId() {
 		return id;
@@ -128,30 +117,6 @@ public class Funcionario implements Serializable {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
 	}
 
 	@Override

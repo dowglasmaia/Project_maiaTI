@@ -15,7 +15,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.dowglasmaia.maiati.domain.Funcionario;
+import com.dowglasmaia.maiati.domain.Usuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -33,7 +33,7 @@ public class SecurityAuthentication extends AbstractAuthenticationProcessingFilt
 			throws AuthenticationException, IOException, ServletException {
 
 		// Convert JSON que vem da requisão para Objeto no caso aqui, o Usuario.
-		Funcionario usuario = new ObjectMapper().readValue(request.getInputStream(), Funcionario.class);
+		Usuario usuario = new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
 
 		/* Retorna as credencias e autorizações do usuario */
 		return getAuthenticationManager().authenticate(
@@ -48,7 +48,7 @@ public class SecurityAuthentication extends AbstractAuthenticationProcessingFilt
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
 
-		Funcionario usuario = new Funcionario();
+		Usuario usuario = new Usuario();
 		usuario.setLogin(authResult.getName());
 
 		usuario.setToken(ConfgToken.gerarToken(usuario.getLogin()));
@@ -64,7 +64,7 @@ public class SecurityAuthentication extends AbstractAuthenticationProcessingFilt
 	protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException failed) throws IOException, ServletException {
 
-		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Usuário e/ou Senha inválidos!");
+		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Usuário e/ou Senha Inválidos!");
 	}
 
 }
