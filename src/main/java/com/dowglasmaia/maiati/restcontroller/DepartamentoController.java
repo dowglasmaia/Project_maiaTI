@@ -52,7 +52,19 @@ public class DepartamentoController {
 		} catch (Exception e) {
 			throw new NoSuchElementException("Registro não encontrado");
 		}
-		
+
+	}
+
+	/* Endpoint - Buscar por nome */
+	@GetMapping("lista/{nome}")
+	public ResponseEntity<List<Departamento>> buscarPorNome(@PathVariable String nome) {
+		try {
+			List<Departamento> lista = service.buscarPorNome(nome);
+			return ResponseEntity.ok().body(lista);
+		} catch (Exception e) {
+			throw new NoSuchElementException("Registro não encontrado");
+		}
+
 	}
 
 	/* Endpoint - Delete */

@@ -24,7 +24,7 @@ public class Departamento implements Serializable {
 	private String nome;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "departamentos")
+	@OneToMany(mappedBy = "departamento")
 	private List<Cargo> cargos = new ArrayList<>();
 
 	public Long getId() {

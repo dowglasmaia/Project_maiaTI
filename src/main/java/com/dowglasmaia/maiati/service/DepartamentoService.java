@@ -22,13 +22,16 @@ public class DepartamentoService {
 	/* Buscar por ID */
 	public Departamento buscarPorID(Long id) throws Exception {
 		Departamento dep = repository.findById(id);
-
 		if (dep != null) {
 			return dep;
 		} else {
 			throw new Exception();
 		}
+	}
 
+	/* Buscar por Nome */
+	public List<Departamento> buscarPorNome(String nome) throws Exception {
+		return repository.findByName(nome);
 	}
 
 	/* Buscar Todos */
@@ -37,7 +40,7 @@ public class DepartamentoService {
 	}
 
 	/* Delete */
-	public void remove(Long id) throws Exception{
+	public void remove(Long id) throws Exception {
 		Departamento dep = new Departamento();
 		dep.setId(id);
 		repository.delete(id);

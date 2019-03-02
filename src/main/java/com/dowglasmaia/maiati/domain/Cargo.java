@@ -35,7 +35,7 @@ public class Cargo implements Serializable {
 	@NotNull(message = "Selecione o Departemento relativo ao Cargo.")
 	@JoinColumn(nullable = false)
 	@ManyToOne
-	private Departamento departamentos;
+	private Departamento departamento;
 
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "cargo")
@@ -57,12 +57,12 @@ public class Cargo implements Serializable {
 		this.nome = nome;
 	}
 
-	public Departamento getDepartamentos() {
-		return departamentos;
+	public Departamento getDepartamento() {
+		return departamento;
 	}
 
-	public void setDepartamentos(Departamento departamentos) {
-		this.departamentos = departamentos;
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
 	}
 
 	public List<Funcionario> getFuncionarios() {
