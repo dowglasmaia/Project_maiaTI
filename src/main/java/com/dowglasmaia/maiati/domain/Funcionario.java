@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
@@ -40,6 +41,15 @@ public class Funcionario implements Serializable {
 	@Column(length = 100)
 	@NotBlank(message = "Campo Obrogatório")
 	private String nome;
+	
+	@Column(length = 100)
+	@NotBlank(message = "Campo Obrogatório")
+	@Email
+	private String email;
+	
+	@Column(length = 100)
+	@NotBlank(message = "Campo Obrogatório")
+	private String telefone;
 
 	@NotNull(message = "Campo Obrogatório")
 	@PastOrPresent(message = "A Data Não Pode Ser Posterior ao Dia de Hoje. ")
