@@ -27,6 +27,17 @@ public class Departamento implements Serializable {
 	@OneToMany(mappedBy = "departamento")
 	private List<Cargo> cargos = new ArrayList<>();
 
+	public Departamento() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Departamento(Long id,
+			@NotBlank(message = "Informe um Nome para Departamento") @Size(min = 3, max = 60, message = "O nome do Departamento deve ter entre {min} e {max} caracteres.") String nome) {
+		super();
+		this.id = id;
+		this.nome = nome;
+	}
+
 	public Long getId() {
 		return id;
 	}

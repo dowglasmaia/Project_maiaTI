@@ -3,6 +3,7 @@ package com.dowglasmaia.maiati.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,11 +24,11 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
- * @author Dowglas Maia 
- * Skype: live:dowglasmaia 
- * E-mail:dowglasmaia@live.com
- * Linkedin: www.linkedin.com/in/dowglasmaia
+ * @author Dowglas Maia Skype: live:dowglasmaia E-mail:dowglasmaia@live.com
+ *         Linkedin: www.linkedin.com/in/dowglasmaia
  */
 
 @Entity
@@ -41,23 +42,21 @@ public class Funcionario implements Serializable {
 	@Column(length = 100)
 	@NotBlank(message = "Campo Obrogatório")
 	private String nome;
-	
+
 	@Column(length = 100)
 	@NotBlank(message = "Campo Obrogatório")
 	@Email
 	private String email;
-	
+
 	@Column(length = 100)
 	@NotBlank(message = "Campo Obrogatório")
 	private String telefone;
 
-	@NotNull(message = "Campo Obrogatório")
-	@PastOrPresent(message = "A Data Não Pode Ser Posterior ao Dia de Hoje. ")
-	@DateTimeFormat(iso = ISO.DATE)
-	private LocalDate dataAdmissao;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+	private String dataAdmissao;
 
 	@DateTimeFormat(iso = ISO.DATE)
-	private LocalDate dataDemissao;
+	private String dataDemissao;
 
 	@NotNull(message = "Campo Obrogatório")
 	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
@@ -71,6 +70,24 @@ public class Funcionario implements Serializable {
 	@Valid
 	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
+
+	public Funcionario() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Funcionario(Long id, String nome, String email, String telefone, String dataAdmissao, String dataDemissao,
+			BigDecimal salario, Cargo cargo, Endereco endereco) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.telefone = telefone;
+		this.dataAdmissao = dataAdmissao;
+		this.dataDemissao = dataDemissao;
+		this.salario = salario;
+		this.cargo = cargo;
+		this.endereco = endereco;
+	}
 
 	// ======== Getters e Setters ================//
 	public Long getId() {
@@ -89,19 +106,19 @@ public class Funcionario implements Serializable {
 		this.nome = nome;
 	}
 
-	public LocalDate getDataAdmissao() {
+	public String getDataAdmissao() {
 		return dataAdmissao;
 	}
 
-	public void setDataAdmissao(LocalDate dataAdmissao) {
+	public void setDataAdmissao(String dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
 	}
 
-	public LocalDate getDataDemissao() {
+	public String getDataDemissao() {
 		return dataDemissao;
 	}
 
-	public void setDataDemissao(LocalDate dataDemissao) {
+	public void setDataDemissao(String dataDemissao) {
 		this.dataDemissao = dataDemissao;
 	}
 
@@ -129,7 +146,6 @@ public class Funcionario implements Serializable {
 		this.endereco = endereco;
 	}
 
-	
 	public String getEmail() {
 		return email;
 	}

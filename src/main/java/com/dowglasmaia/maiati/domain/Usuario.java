@@ -15,7 +15,7 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "Informe o Nome do Cargo")	
+	@NotBlank(message = "Informe o Nome do Cargo")
 	@Column(length = 50, nullable = false, unique = true)
 	private String nome;
 
@@ -27,6 +27,21 @@ public class Usuario implements Serializable {
 	private String senha;
 
 	private String token;
+
+	public Usuario() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Usuario(Long id, @NotBlank(message = "Informe o Nome do Cargo") String nome,
+			@NotNull @Size(min = 4, max = 60, message = "O Login deve ter entre {min} e {max} caracteres.") String login,
+			@NotNull String senha, String token) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.login = login;
+		this.senha = senha;
+		this.token = token;
+	}
 
 	// ======== Getters e Setters ================//
 

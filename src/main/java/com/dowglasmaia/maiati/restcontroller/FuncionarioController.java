@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.dowglasmaia.maiati.domain.Funcionario;
 import com.dowglasmaia.maiati.domain.dto.FuncionarioDTO;
+import com.dowglasmaia.maiati.domain.dto.FuncionarioNewDTO;
 import com.dowglasmaia.maiati.service.FuncionarioService;
 
 @RestController
@@ -31,8 +32,9 @@ public class FuncionarioController {
 
 	/* Endpoint - Salvar */
 	@PostMapping
-	public ResponseEntity<Void> save(@Valid @RequestBody Funcionario funcionario) {
-		Funcionario obj = service.salvar(funcionario);
+	public ResponseEntity<Void> save(@Valid @RequestBody FuncionarioNewDTO objDTO) {
+		Funcionario obj = service.fromDTO(objDTO);
+		obj = service.salvar(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 

@@ -1,7 +1,9 @@
 package com.dowglasmaia.maiati.domain.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class FuncionarioNewDTO {
 
@@ -13,13 +15,12 @@ public class FuncionarioNewDTO {
 
 	private String telefone;
 
-	private LocalDate dataAdmissao;
+	@JsonFormat(shape=JsonFormat.Shape.ANY, pattern="dd-MM-yyyy")
+	private String dataAdmissao;
 
-	private LocalDate dataDemissao;
+	private String dataDemissao;
 
 	private BigDecimal salario;
-
-	private String cargo;
 
 	private String logradouro;
 
@@ -34,6 +35,10 @@ public class FuncionarioNewDTO {
 	private Long cidadeID;
 
 	private Long estadoID;
+
+	private Long cargoID;
+
+	private Long departamentoID;
 
 	public Long getId() {
 		return id;
@@ -67,19 +72,19 @@ public class FuncionarioNewDTO {
 		this.telefone = telefone;
 	}
 
-	public LocalDate getDataAdmissao() {
+	public String getDataAdmissao() {
 		return dataAdmissao;
 	}
 
-	public void setDataAdmissao(LocalDate dataAdmissao) {
+	public void setDataAdmissao(String dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
 	}
 
-	public LocalDate getDataDemissao() {
+	public String getDataDemissao() {
 		return dataDemissao;
 	}
 
-	public void setDataDemissao(LocalDate dataDemissao) {
+	public void setDataDemissao(String dataDemissao) {
 		this.dataDemissao = dataDemissao;
 	}
 
@@ -91,12 +96,20 @@ public class FuncionarioNewDTO {
 		this.salario = salario;
 	}
 
-	public String getCargo() {
-		return cargo;
+	public Long getCargoID() {
+		return cargoID;
 	}
 
-	public void setCargo(String cargo) {
-		this.cargo = cargo;
+	public void setCargoID(Long cargoID) {
+		this.cargoID = cargoID;
+	}
+
+	public Long getDepartamentoID() {
+		return departamentoID;
+	}
+
+	public void setDepartamentoID(Long departamentoID) {
+		this.departamentoID = departamentoID;
 	}
 
 	public String getLogradouro() {

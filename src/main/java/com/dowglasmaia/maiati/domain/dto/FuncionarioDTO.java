@@ -2,6 +2,8 @@ package com.dowglasmaia.maiati.domain.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Date;
+
 
 import com.dowglasmaia.maiati.domain.Funcionario;
 
@@ -11,10 +13,11 @@ public class FuncionarioDTO {
 	private String nome;
 	private String email;
 	private String telefone;
-	private LocalDate dataAdmissao;
-	private LocalDate dataDemissao;
+	private String dataAdmissao;
+	private String dataDemissao;
 	private BigDecimal salario;
 	private String cargo;
+	private String cidade;
 
 	public FuncionarioDTO() {
 		
@@ -38,6 +41,7 @@ public class FuncionarioDTO {
 		this.dataDemissao = obj.getDataDemissao();
 		this.salario = obj.getSalario();
 		this.cargo = obj.getCargo().getNome();
+		this.cidade = obj.getEndereco().getCidade().getNome(); 
 	}
 
 	public String getNome() {
@@ -64,19 +68,19 @@ public class FuncionarioDTO {
 		this.telefone = telefone;
 	}
 
-	public LocalDate getDataAdmissao() {
+	public String getDataAdmissao() {
 		return dataAdmissao;
 	}
 
-	public void setDataAdmissao(LocalDate dataAdmissao) {
+	public void setDataAdmissao(String dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
 	}
 
-	public LocalDate getDataDemissao() {
+	public String getDataDemissao() {
 		return dataDemissao;
 	}
 
-	public void setDataDemissao(LocalDate dataDemissao) {
+	public void setDataDemissao(String dataDemissao) {
 		this.dataDemissao = dataDemissao;
 	}
 
@@ -95,5 +99,14 @@ public class FuncionarioDTO {
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+	
 
 }
