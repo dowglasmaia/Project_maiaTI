@@ -4,13 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
@@ -20,38 +18,35 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Cargo implements Serializable {
+public class Cidade implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "Informe o Nome do Cargo")
-	@Size(min = 3, max = 60, message = "O nome do Cargo deve ter entre {min} e {max} caracteres.")
-	@Column(length = 50, nullable = false, unique = true)
+	@NotBlank(message = "Informe a UF do Estado")
+	@Size(min = 3, max = 50, message = "A sigla do Estado deve ter entre {min} e {max} caracteres.")
+	@Column(length = 50, nullable = false)
 	private String nome;
 
-	@NotNull(message = "Selecione o Departemento relativo ao Cargo.")
-	@JoinColumn(nullable = false)
+	@NotNull(message = "Informe uma UF para a Cidade")
 	@ManyToOne
-	private Departamento departamento;
-
+	private Estado estado;
+	
 	@JsonIgnore
-	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "cargo")
-	private List<Funcionario> funcionarios = new ArrayList<>();
+	@OneToMany(mappedBy = "cidade")
+	private List<Endereco> enderecos = new ArrayList<>();
 
-	public Cargo() {
+	public Cidade() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cargo(Long id,
-			@NotBlank(message = "Informe o Nome do Cargo") @Size(min = 3, max = 60, message = "O nome do Cargo deve ter entre {min} e {max} caracteres.") String nome,
-			@NotNull(message = "Selecione o Departemento relativo ao Cargo.") Departamento departamento) {
+	public Cidade(Long id, String nome, Estado uf) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.departamento = departamento;
+		this.estado = uf;
 	}
 
 	public Long getId() {
@@ -70,20 +65,12 @@ public class Cargo implements Serializable {
 		this.nome = nome;
 	}
 
-	public Departamento getDepartamento() {
-		return departamento;
+	public Estado getUf() {
+		return estado;
 	}
 
-	public void setDepartamento(Departamento departamento) {
-		this.departamento = departamento;
-	}
-
-	public List<Funcionario> getFuncionarios() {
-		return funcionarios;
-	}
-
-	public void setFuncionarios(List<Funcionario> funcionarios) {
-		this.funcionarios = funcionarios;
+	public void setUf(Estado estado) {
+		this.estado = estado;
 	}
 
 	@Override
@@ -102,7 +89,7 @@ public class Cargo implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cargo other = (Cargo) obj;
+		Cidade other = (Cidade) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

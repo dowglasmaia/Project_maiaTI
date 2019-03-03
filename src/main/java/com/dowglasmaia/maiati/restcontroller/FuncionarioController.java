@@ -18,16 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.dowglasmaia.maiati.domain.Cargo;
-import com.dowglasmaia.maiati.domain.Departamento;
 import com.dowglasmaia.maiati.domain.Funcionario;
-import com.dowglasmaia.maiati.domain.dto.CargoDTO;
 import com.dowglasmaia.maiati.domain.dto.FuncionarioDTO;
-import com.dowglasmaia.maiati.service.DepartamentoService;
 import com.dowglasmaia.maiati.service.FuncionarioService;
 
 @RestController
-@RequestMapping("/departamentos")
+@RequestMapping("/funcionarios")
 public class FuncionarioController {
 
 	@Autowired

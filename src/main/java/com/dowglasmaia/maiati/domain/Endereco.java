@@ -2,11 +2,13 @@ package com.dowglasmaia.maiati.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
-import com.dowglasmaia.maiati.domain.enums.UF;
 
 @Entity
 public class Endereco implements Serializable {
@@ -33,16 +35,29 @@ public class Endereco implements Serializable {
 	private String cep;
 
 	@Column(length = 50)
-	private String Complemento;
+	private String complemento;
+	
+	
+	@ManyToOne
+	private Cidade cidade;
 
-	@NotBlank(message = "Campo Obrogatório")
-	@Column(length = 50, nullable = false)
-	private String Cidade;
+	public Endereco() {
 
-	@NotNull(message = "Informe uma UF para a Cidade")
-	@Column(length = 2, nullable = false)
-	@Enumerated(EnumType.STRING)
-	private UF uf;
+	}
+
+	public Endereco(Long id, @NotBlank(message = "Campo Obrogatório") String logradouro,
+			@NotBlank(message = "Campo Obrogatório") String numero,
+			@NotBlank(message = "Campo Obrogatório") String bairro, @NotBlank(message = "Campo Obrogatório") String cep,
+			String complemento, @NotBlank(message = "Campo Obrogatório") Cidade cidade) {
+		super();
+		this.id = id;
+		this.logradouro = logradouro;
+		this.numero = numero;
+		this.bairro = bairro;
+		this.cep = cep;
+		this.complemento = complemento;
+		this.cidade = cidade;
+	}
 
 	public Long getId() {
 		return id;
@@ -85,27 +100,19 @@ public class Endereco implements Serializable {
 	}
 
 	public String getComplemento() {
-		return Complemento;
+		return complemento;
 	}
 
 	public void setComplemento(String complemento) {
-		Complemento = complemento;
+		this.complemento = complemento;
 	}
 
-	public String getCidade() {
-		return Cidade;
+	public Cidade getCidade() {
+		return cidade;
 	}
 
-	public void setCidade(String cidade) {
-		Cidade = cidade;
-	}
-
-	public UF getUf() {
-		return uf;
-	}
-
-	public void setUf(UF uf) {
-		this.uf = uf;
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
 	}
 
 	@Override
