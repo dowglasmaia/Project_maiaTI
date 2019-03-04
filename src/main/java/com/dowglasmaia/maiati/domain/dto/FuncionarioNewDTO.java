@@ -1,9 +1,6 @@
 package com.dowglasmaia.maiati.domain.dto;
 
 import java.math.BigDecimal;
-import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class FuncionarioNewDTO {
 
@@ -15,7 +12,6 @@ public class FuncionarioNewDTO {
 
 	private String telefone;
 
-	@JsonFormat(shape=JsonFormat.Shape.ANY, pattern="dd-MM-yyyy")
 	private String dataAdmissao;
 
 	private String dataDemissao;
@@ -32,14 +28,12 @@ public class FuncionarioNewDTO {
 
 	private String complemento;
 
-	private Long cidadeID;
+	private String cidade;
 
 	private Long estadoID;
 
 	private Long cargoID;
-
-	private Long departamentoID;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -104,13 +98,6 @@ public class FuncionarioNewDTO {
 		this.cargoID = cargoID;
 	}
 
-	public Long getDepartamentoID() {
-		return departamentoID;
-	}
-
-	public void setDepartamentoID(Long departamentoID) {
-		this.departamentoID = departamentoID;
-	}
 
 	public String getLogradouro() {
 		return logradouro;
@@ -152,12 +139,12 @@ public class FuncionarioNewDTO {
 		this.complemento = complemento;
 	}
 
-	public Long getCidadeID() {
-		return cidadeID;
+	public String getCidade() {
+		return cidade;
 	}
 
-	public void setCidadeID(Long cidadeID) {
-		this.cidadeID = cidadeID;
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 
 	public Long getEstadoID() {

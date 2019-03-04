@@ -12,7 +12,7 @@ public class CargoRepository extends AbstractRepo<Cargo, Long>{
 	
 	/* buscar por nome, com createquery - dinamica */
 	public List<Cargo> findByName(String nome) {
-		return createDinamicQuery("select c from Cargo c where d.nome like concat('%',?1,'%')", nome);
+		return createDinamicQuery("select c from Cargo c where c.nome like concat('%',?1,'%')", nome);
 	}
 
 }

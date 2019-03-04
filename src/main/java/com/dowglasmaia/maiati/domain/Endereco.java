@@ -2,12 +2,14 @@ package com.dowglasmaia.maiati.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -37,8 +39,8 @@ public class Endereco implements Serializable {
 	@Column(length = 50)
 	private String complemento;
 	
-	
-	@ManyToOne
+	@Valid
+	@ManyToOne(cascade =CascadeType.ALL)
 	private Cidade cidade;
 
 	public Endereco() {

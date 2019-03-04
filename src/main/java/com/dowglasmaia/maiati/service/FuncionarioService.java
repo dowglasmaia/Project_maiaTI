@@ -1,7 +1,5 @@
 package com.dowglasmaia.maiati.service;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.dowglasmaia.maiati.domain.Cargo;
 import com.dowglasmaia.maiati.domain.Cidade;
-import com.dowglasmaia.maiati.domain.Departamento;
 import com.dowglasmaia.maiati.domain.Endereco;
 import com.dowglasmaia.maiati.domain.Estado;
 import com.dowglasmaia.maiati.domain.Funcionario;
@@ -28,20 +25,18 @@ public class FuncionarioService {
 	}
 
 	/* Salvando Funcioanrio e seus relacionamtos */
-	public Funcionario fromDTO(FuncionarioNewDTO objDTO) {
+	public Funcionario fromDTO(FuncionarioNewDTO objDTO) {		
 		
-		
-		
-		Departamento dp = new Departamento(objDTO.getDepartamentoID(), null);
 
-		Cargo cargo = new Cargo(objDTO.getCargoID(), null, dp);
-
+		Cargo cargo = new Cargo(objDTO.getCargoID(), null, null);
+			
 		Estado uf = new Estado(objDTO.getEstadoID(), null, null);
 
-		Cidade cid = new Cidade(objDTO.getCidadeID(), null, uf);
+		Cidade cid = new Cidade(null, objDTO.getCidade(), uf);
 
 		Endereco end = new Endereco(null, objDTO.getLogradouro(), objDTO.getNumero(), objDTO.getBairro(),
 				objDTO.getCep(), objDTO.getComplemento(), cid);
+		
 
 		Funcionario fun = new Funcionario(null, objDTO.getNome(), objDTO.getEmail(), objDTO.getTelefone(),
 				 objDTO.getDataAdmissao(), 

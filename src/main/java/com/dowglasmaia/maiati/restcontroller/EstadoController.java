@@ -3,7 +3,6 @@ package com.dowglasmaia.maiati.restcontroller;
 import java.net.URI;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -18,30 +17,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.dowglasmaia.maiati.domain.Cargo;
-import com.dowglasmaia.maiati.domain.dto.CargoDTO;
-import com.dowglasmaia.maiati.service.CargoService;
+import com.dowglasmaia.maiati.domain.Estado;
+import com.dowglasmaia.maiati.service.EstadoService;
 
 @RestController
-@RequestMapping("/cargos")
-public class CargoController {
+@RequestMapping("/estados")
+public class EstadoController {
 
 	@Autowired
-	private CargoService service;
+	private EstadoService service;
 
 	/* Endpoint - Listar Todos */
 	@GetMapping
-	public ResponseEntity<List<CargoDTO>> listarTodos() {
-		List<Cargo> lista = service.buscarTodos();
-		List<CargoDTO> listaDTO = lista.stream().map(obj -> new CargoDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listaDTO);
+	public ResponseEntity<List<Estado>> listarTodos() {
+		List<Estado> lista = service.buscarTodos();
+		return ResponseEntity.ok().body(lista);
 	}
 
 	/* Endpoint - Buscar por ID */
 	@GetMapping("/{id}")
-	public ResponseEntity<Cargo> buscarPorID(@PathVariable Long id) {
+	public ResponseEntity<Estado> buscarPorID(@PathVariable Long id) {
 		try {
-			Cargo obj = service.buscarPorID(id);
+			Estado obj = service.buscarPorID(id);
 			return ResponseEntity.ok().body(obj);
 		} catch (Exception e) {
 			throw new NoSuchElementException("Registro não encontrado");
@@ -51,8 +48,8 @@ public class CargoController {
 
 	/* Endpoint - Salvar */
 	@PostMapping
-	public ResponseEntity<Void> save(@Valid @RequestBody Cargo cargo) {
-		Cargo obj = service.salvar(cargo);
+	public ResponseEntity<Void> save(@Valid @RequestBody Estado uf) {
+		Estado obj = service.salvar(uf);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 
@@ -60,17 +57,15 @@ public class CargoController {
 
 	/* Endpoint - Buscar por nome */
 	@GetMapping("lista/{nome}")
-	public ResponseEntity<List<Cargo>> buscarPorNome(@PathVariable String nome) {
+	public ResponseEntity<List<Estado>> buscarPorNome(@PathVariable String nome) {
 		try {
-			List<Cargo> lista = service.buscarPorNome(nome);
+			List<Estado> lista = service.buscarPorNome(nome);
 			return ResponseEntity.ok().body(lista);
 		} catch (Exception e) {
 			throw new NoSuchElementException("Registro não encontrado");
 		}
 
 	}
-	
-	
 
 	/* Endpoint - Delete */
 	@DeleteMapping("/{id}")
