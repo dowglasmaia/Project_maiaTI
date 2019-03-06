@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -38,10 +40,15 @@ public class Endereco implements Serializable {
 
 	@Column(length = 50)
 	private String complemento;
+
 	
 	@Valid
-	@ManyToOne(cascade =CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Cidade cidade;
+
+	@JsonIgnore
+	@ManyToOne
+	private Funcionario funcionario;
 
 	public Endereco() {
 
@@ -50,7 +57,7 @@ public class Endereco implements Serializable {
 	public Endereco(Long id, @NotBlank(message = "Campo Obrogatório") String logradouro,
 			@NotBlank(message = "Campo Obrogatório") String numero,
 			@NotBlank(message = "Campo Obrogatório") String bairro, @NotBlank(message = "Campo Obrogatório") String cep,
-			String complemento, @NotBlank(message = "Campo Obrogatório") Cidade cidade) {
+			String complemento, @Valid Cidade cidade, Funcionario funcionario) {
 		super();
 		this.id = id;
 		this.logradouro = logradouro;
@@ -59,6 +66,7 @@ public class Endereco implements Serializable {
 		this.cep = cep;
 		this.complemento = complemento;
 		this.cidade = cidade;
+		this.funcionario = funcionario;
 	}
 
 	public Long getId() {
@@ -115,6 +123,14 @@ public class Endereco implements Serializable {
 
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
+	}
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}
 
 	@Override

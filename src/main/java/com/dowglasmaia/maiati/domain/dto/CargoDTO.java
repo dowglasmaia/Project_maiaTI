@@ -13,9 +13,7 @@ public class CargoDTO implements Serializable {
 
 	private String departamento;
 
-	public CargoDTO() {
-
-	}
+	public CargoDTO() {	}
 
 	public CargoDTO(Cargo obj) {
 		this.id = obj.getId();

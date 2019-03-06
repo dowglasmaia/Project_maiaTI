@@ -2,8 +2,8 @@ package com.dowglasmaia.maiati.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,13 +12,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.validation.Valid;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
 
+import org.joda.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.format.annotation.NumberFormat;
@@ -52,11 +53,11 @@ public class Funcionario implements Serializable {
 	@NotBlank(message = "Campo Obrogatório")
 	private String telefone;
 
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
-	private String dataAdmissao;
+	@Temporal(TemporalType.DATE)
+	private Date dataAdmissao;
 
-	@DateTimeFormat(iso = ISO.DATE)
-	private String dataDemissao;
+	@Temporal(TemporalType.DATE)
+	private Date dataDemissao;
 
 	@NotNull(message = "Campo Obrogatório")
 	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
@@ -67,15 +68,14 @@ public class Funcionario implements Serializable {
 	@ManyToOne
 	private Cargo cargo;
 
-	@Valid
-	@OneToOne(cascade = CascadeType.ALL)
-	private Endereco endereco;
+	@OneToMany(mappedBy = "funcionario", cascade=CascadeType.ALL, orphanRemoval = true)
+	private Set<Endereco>listaEnderecos;
 
 	public Funcionario() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Funcionario(Long id, String nome, String email, String telefone, String dataAdmissao, String dataDemissao,
+	public Funcionario(Long id, String nome, String email, String telefone, Date dataAdmissao, Date dataDemissao,
 			BigDecimal salario, Cargo cargo, Endereco endereco) {
 		super();
 		this.id = id;
@@ -86,7 +86,7 @@ public class Funcionario implements Serializable {
 		this.dataDemissao = dataDemissao;
 		this.salario = salario;
 		this.cargo = cargo;
-		this.endereco = endereco;
+		
 	}
 
 	// ======== Getters e Setters ================//
@@ -106,19 +106,19 @@ public class Funcionario implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getDataAdmissao() {
+	public Date getDataAdmissao() {
 		return dataAdmissao;
 	}
 
-	public void setDataAdmissao(String dataAdmissao) {
+	public void setDataAdmissao(Date dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
 	}
 
-	public String getDataDemissao() {
+	public Date getDataDemissao() {
 		return dataDemissao;
 	}
 
-	public void setDataDemissao(String dataDemissao) {
+	public void setDataDemissao(Date dataDemissao) {
 		this.dataDemissao = dataDemissao;
 	}
 
@@ -138,12 +138,14 @@ public class Funcionario implements Serializable {
 		this.cargo = cargo;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+
+
+	public Set<Endereco> getListaEnderecos() {
+		return listaEnderecos;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setListaEnderecos(Set<Endereco> listaEnderecos) {
+		this.listaEnderecos = listaEnderecos;
 	}
 
 	public String getEmail() {

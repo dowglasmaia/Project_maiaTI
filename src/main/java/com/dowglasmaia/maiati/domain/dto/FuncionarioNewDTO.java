@@ -30,10 +30,21 @@ public class FuncionarioNewDTO {
 
 	private String cidade;
 
-	private Long estadoID;
+	private String estado;
 
-	private Long cargoID;
+	private String cargo;
 	
+	
+	public FuncionarioNewDTO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+	
+
+
+
 	public Long getId() {
 		return id;
 	}
@@ -90,12 +101,12 @@ public class FuncionarioNewDTO {
 		this.salario = salario;
 	}
 
-	public Long getCargoID() {
-		return cargoID;
+	public String getCargo() {
+		return cargo;
 	}
 
-	public void setCargoID(Long cargoID) {
-		this.cargoID = cargoID;
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
 	}
 
 
@@ -147,12 +158,12 @@ public class FuncionarioNewDTO {
 		this.cidade = cidade;
 	}
 
-	public Long getEstadoID() {
-		return estadoID;
+	public String getEstado() {
+		return estado;
 	}
 
-	public void setEstadoID(Long estadoID) {
-		this.estadoID = estadoID;
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 }

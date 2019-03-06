@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +26,6 @@ public class Cargo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "Informe o Nome do Cargo")
 	@Size(min = 3, max = 60, message = "O nome do Cargo deve ter entre {min} e {max} caracteres.")
 	@Column(length = 50, nullable = false, unique = true)
 	private String nome;
@@ -38,7 +36,7 @@ public class Cargo implements Serializable {
 	private Departamento departamento;
 
 	@JsonIgnore
-	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "cargo")
+	@OneToMany(mappedBy = "cargo")
 	private List<Funcionario> funcionarios = new ArrayList<>();
 
 	public Cargo() {

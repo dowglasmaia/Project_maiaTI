@@ -19,7 +19,7 @@ public class Departamento implements Serializable {
 	private Long id;
 
 	@NotBlank(message = "Informe um Nome para Departamento")
-	@Size(min = 3, max = 60, message = "O nome do Departamento deve ter entre {min} e {max} caracteres.")
+	@Size(min = 2, max = 60, message = "O nome do Departamento deve ter entre {min} e {max} caracteres.")
 	@Column(length = 50, nullable = false, unique = true)
 	private String nome;
 

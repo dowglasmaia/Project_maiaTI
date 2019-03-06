@@ -1,6 +1,7 @@
 package com.dowglasmaia.maiati.domain.dto;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import com.dowglasmaia.maiati.domain.Funcionario;
 
@@ -10,8 +11,8 @@ public class FuncionarioDTO {
 	private String nome;
 	private String email;
 	private String telefone;
-	private String dataAdmissao;
-	private String dataDemissao;
+	private Date dataAdmissao;
+	private Date dataDemissao;
 	private BigDecimal salario;
 	private String cargo;
 	private String cidade;
@@ -30,7 +31,7 @@ public class FuncionarioDTO {
 		this.dataDemissao = obj.getDataDemissao();
 		this.salario = obj.getSalario();
 		this.cargo = obj.getCargo().getNome();
-		this.cidade = obj.getEndereco().getCidade().getNome();
+		
 	}
 
 	public Long getId() {
@@ -65,19 +66,19 @@ public class FuncionarioDTO {
 		this.telefone = telefone;
 	}
 
-	public String getDataAdmissao() {
+	public Date getDataAdmissao() {
 		return dataAdmissao;
 	}
 
-	public void setDataAdmissao(String dataAdmissao) {
+	public void setDataAdmissao(Date dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
 	}
 
-	public String getDataDemissao() {
+	public Date getDataDemissao() {
 		return dataDemissao;
 	}
 
-	public void setDataDemissao(String dataDemissao) {
+	public void setDataDemissao(Date dataDemissao) {
 		this.dataDemissao = dataDemissao;
 	}
 

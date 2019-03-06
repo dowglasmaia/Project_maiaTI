@@ -4,14 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,18 +22,18 @@ public class Estado implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "Informe a UF do Estado")
+	//@NotBlank(message = "Informe a UF do Estado")
 	@Size(min = 2, max = 2, message = "A sigla do Estado deve ter entre {min} e {max} caracteres.")
 	@Column(length = 50, nullable = false, unique = true)
 	private String sigla;
 
-	@NotBlank(message = "Informe a UF do Estado")
+	//@NotBlank(message = "Informe a UF do Estado")
 	@Size(min = 3, max = 50, message = "A sigla do Estado deve ter entre {min} e {max} caracteres.")
 	@Column(length = 50, nullable = false)
 	private String nome;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "estado", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "estado")
 	private List<Cidade>cidades = new ArrayList<>();
 
 	
