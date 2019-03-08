@@ -1,8 +1,15 @@
 package com.dowglasmaia.maiati.domain.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
-public class FuncionarioNewDTO {
+import com.dowglasmaia.maiati.domain.Cargo;
+import com.dowglasmaia.maiati.domain.Estado;
+
+
+public class FuncionarioNewDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 
@@ -12,9 +19,9 @@ public class FuncionarioNewDTO {
 
 	private String telefone;
 
-	private String dataAdmissao;
+	private Date dataAdmissao;
 
-	private String dataDemissao;
+	private Date dataDemissao;
 
 	private BigDecimal salario;
 
@@ -30,20 +37,23 @@ public class FuncionarioNewDTO {
 
 	private String cidade;
 
-	private String estado;
+	private Cargo cargo;
 
-	private String cargo;
-	
+	private Estado estado;
 	
 	public FuncionarioNewDTO() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	
-	
-	
 
+	public Estado getEstado() {
+		return estado;
+	}
 
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
 
 	public Long getId() {
 		return id;
@@ -77,19 +87,19 @@ public class FuncionarioNewDTO {
 		this.telefone = telefone;
 	}
 
-	public String getDataAdmissao() {
+	public Date getDataAdmissao() {
 		return dataAdmissao;
 	}
 
-	public void setDataAdmissao(String dataAdmissao) {
+	public void setDataAdmissao(Date dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
 	}
 
-	public String getDataDemissao() {
+	public Date getDataDemissao() {
 		return dataDemissao;
 	}
 
-	public void setDataDemissao(String dataDemissao) {
+	public void setDataDemissao(Date dataDemissao) {
 		this.dataDemissao = dataDemissao;
 	}
 
@@ -101,14 +111,13 @@ public class FuncionarioNewDTO {
 		this.salario = salario;
 	}
 
-	public String getCargo() {
+	public Cargo getCargo() {
 		return cargo;
 	}
 
-	public void setCargo(String cargo) {
+	public void setCargo(Cargo cargo) {
 		this.cargo = cargo;
 	}
-
 
 	public String getLogradouro() {
 		return logradouro;
@@ -156,14 +165,6 @@ public class FuncionarioNewDTO {
 
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
 	}
 
 }

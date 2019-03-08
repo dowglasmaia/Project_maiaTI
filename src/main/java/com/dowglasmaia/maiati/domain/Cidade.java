@@ -11,9 +11,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Cidade implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -21,7 +26,7 @@ public class Cidade implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	//@NotBlank(message = "Informe a UF do Estado")
+	@NotBlank(message = "Informe a UF do Estado")
 	@Size(min = 3, max = 50, message = "A sigla do Estado deve ter entre {min} e {max} caracteres.")
 	@Column(length = 50, nullable = false)
 	private String nome;
@@ -29,6 +34,7 @@ public class Cidade implements Serializable {
 	@ManyToOne
 	private Estado estado;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "cidade")
 	private List<Endereco> enderecos = new ArrayList<>();
 

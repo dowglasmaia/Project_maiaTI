@@ -67,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 			@Override
 			public void customize(Jackson2ObjectMapperBuilder jacksonObjectMapperBuilder) {
-				jacksonObjectMapperBuilder.simpleDateFormat("dd-MM-yyyy");
+				jacksonObjectMapperBuilder.simpleDateFormat("yyyy-MM-dd");
 				
 			}
 			

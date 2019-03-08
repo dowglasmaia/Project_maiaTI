@@ -8,30 +8,32 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.joda.time.LocalDate;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author Dowglas Maia Skype: live:dowglasmaia E-mail:dowglasmaia@live.com
  *         Linkedin: www.linkedin.com/in/dowglasmaia
  */
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 public class Funcionario implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -41,16 +43,16 @@ public class Funcionario implements Serializable {
 	private Long id;
 
 	@Column(length = 100)
-	@NotBlank(message = "Campo Obrogatório")
+	@NotBlank(message = "Campo Obrigatório")
 	private String nome;
 
 	@Column(length = 100)
-	@NotBlank(message = "Campo Obrogatório")
+	@NotBlank(message = "Campo Obrigatório")
 	@Email
 	private String email;
 
 	@Column(length = 100)
-	@NotBlank(message = "Campo Obrogatório")
+	@NotBlank(message = "Campo Obrigatório")
 	private String telefone;
 
 	@Temporal(TemporalType.DATE)
@@ -59,24 +61,30 @@ public class Funcionario implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dataDemissao;
 
-	@NotNull(message = "Campo Obrogatório")
+	@NotNull(message = "Campo Obrigatório")
 	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal salario;
 
-	@NotNull(message = "Campo Obrogatório")
+	@NotNull(message = "Campo Obrigatório")
 	@ManyToOne
+	@JsonProperty("funcionarios")
 	private Cargo cargo;
 
-	@OneToMany(mappedBy = "funcionario", cascade=CascadeType.ALL, orphanRemoval = true)
-	private Set<Endereco>listaEnderecos;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Endereco endereco;
 
 	public Funcionario() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Funcionario(Long id, String nome, String email, String telefone, Date dataAdmissao, Date dataDemissao,
-			BigDecimal salario, Cargo cargo, Endereco endereco) {
+
+
+	public Funcionario(Long id, @NotBlank(message = "Campo Obrogatório") String nome,
+			@NotBlank(message = "Campo Obrogatório") @Email String email,
+			@NotBlank(message = "Campo Obrogatório") String telefone, Date dataAdmissao, Date dataDemissao,
+			@NotNull(message = "Campo Obrogatório") BigDecimal salario,
+			@NotNull(message = "Campo Obrogatório") Cargo cargo, Endereco endereco) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -86,8 +94,10 @@ public class Funcionario implements Serializable {
 		this.dataDemissao = dataDemissao;
 		this.salario = salario;
 		this.cargo = cargo;
-		
+		this.endereco = endereco;
 	}
+
+
 
 	// ======== Getters e Setters ================//
 	public Long getId() {
@@ -138,14 +148,12 @@ public class Funcionario implements Serializable {
 		this.cargo = cargo;
 	}
 
-
-
-	public Set<Endereco> getListaEnderecos() {
-		return listaEnderecos;
+	public Endereco getEndereco() {
+		return endereco;
 	}
 
-	public void setListaEnderecos(Set<Endereco> listaEnderecos) {
-		this.listaEnderecos = listaEnderecos;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 	public String getEmail() {

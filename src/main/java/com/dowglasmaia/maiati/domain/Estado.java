@@ -10,11 +10,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Estado implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -22,21 +24,18 @@ public class Estado implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	//@NotBlank(message = "Informe a UF do Estado")
-	@Size(min = 2, max = 2, message = "A sigla do Estado deve ter entre {min} e {max} caracteres.")
+	@NotBlank(message = "Informe a UF do Estado")
 	@Column(length = 50, nullable = false, unique = true)
 	private String sigla;
 
-	//@NotBlank(message = "Informe a UF do Estado")
-	@Size(min = 3, max = 50, message = "A sigla do Estado deve ter entre {min} e {max} caracteres.")
+	@NotBlank(message = "Informe a UF do Estado")
 	@Column(length = 50, nullable = false)
 	private String nome;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "estado")
-	private List<Cidade>cidades = new ArrayList<>();
+	private List<Cidade> cidades = new ArrayList<>();
 
-	
 	public Estado() {
 		// TODO Auto-generated constructor stub
 	}
@@ -70,8 +69,6 @@ public class Estado implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	
 
 	public List<Cidade> getCidades() {
 		return cidades;

@@ -3,6 +3,7 @@ package com.dowglasmaia.maiati.restcontroller;
 import java.net.URI;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.dowglasmaia.maiati.domain.Funcionario;
+import com.dowglasmaia.maiati.domain.dto.FuncionarioDTO;
+import com.dowglasmaia.maiati.domain.dto.FuncionarioNewDTO;
 import com.dowglasmaia.maiati.service.FuncionarioService;
 
 @RestController
@@ -29,7 +32,8 @@ public class FuncionarioController {
 
 	/* Endpoint - Salvar */
 	@PostMapping
-	public ResponseEntity<Void> save(@Valid @RequestBody Funcionario obj) {
+	public ResponseEntity<Void> save(@Valid @RequestBody FuncionarioNewDTO objDTO) {
+		Funcionario obj = service.fromDTO(objDTO);
 		service.salvar(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
@@ -38,11 +42,11 @@ public class FuncionarioController {
 
 	/* Endpoint - Listar Todos */
 	@GetMapping
-	public List<Funcionario> listarTodos() {
+	public List<FuncionarioDTO> listarTodos() {
 		List<Funcionario> lista = service.buscarTodos();
-		// List<FuncionarioDTO> listaDTO = lista.stream().map(obj -> new
-		// FuncionarioDTO(obj)).collect(Collectors.toList());
-		return lista;
+		List<FuncionarioDTO> listaDTO = lista.stream().map(obj -> new
+		FuncionarioDTO(obj)).collect(Collectors.toList());
+		return listaDTO;
 	}
 
 	/* Endpoint - Buscar por ID */

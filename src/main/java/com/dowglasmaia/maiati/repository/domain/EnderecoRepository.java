@@ -12,7 +12,7 @@ public class EnderecoRepository extends AbstractRepo<Endereco, Long>{
 	
 	/* buscar por nome, com createquery - dinamica */
 	public List<Endereco> findByName(String nome) {
-		return createDinamicQuery("select c from Cargo c where c.nome like concat('%',?1,'%')", nome);
+		return createDinamicQuery("select e from Endereco e where e.nome like concat('%',?1,'%')", nome);
 	}
 
 }

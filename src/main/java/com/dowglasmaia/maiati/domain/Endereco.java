@@ -1,6 +1,8 @@
 package com.dowglasmaia.maiati.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,12 +11,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -40,15 +45,15 @@ public class Endereco implements Serializable {
 
 	@Column(length = 50)
 	private String complemento;
-
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "endereco")
+	private List<Funcionario> funcionarios = new ArrayList<>();
 	
 	@Valid
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Cidade cidade;
 
-	@JsonIgnore
-	@ManyToOne
-	private Funcionario funcionario;
 
 	public Endereco() {
 
@@ -57,7 +62,7 @@ public class Endereco implements Serializable {
 	public Endereco(Long id, @NotBlank(message = "Campo Obrogatório") String logradouro,
 			@NotBlank(message = "Campo Obrogatório") String numero,
 			@NotBlank(message = "Campo Obrogatório") String bairro, @NotBlank(message = "Campo Obrogatório") String cep,
-			String complemento, @Valid Cidade cidade, Funcionario funcionario) {
+			String complemento, @Valid Cidade cidade) {
 		super();
 		this.id = id;
 		this.logradouro = logradouro;
@@ -66,7 +71,7 @@ public class Endereco implements Serializable {
 		this.cep = cep;
 		this.complemento = complemento;
 		this.cidade = cidade;
-		this.funcionario = funcionario;
+		
 	}
 
 	public Long getId() {
@@ -124,13 +129,16 @@ public class Endereco implements Serializable {
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
+	
+	
 
-	public Funcionario getFuncionario() {
-		return funcionario;
+
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
+	public void setFuncionarios(List<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
 	}
 
 	@Override

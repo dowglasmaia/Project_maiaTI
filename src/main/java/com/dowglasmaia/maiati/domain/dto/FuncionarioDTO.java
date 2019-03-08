@@ -31,6 +31,7 @@ public class FuncionarioDTO {
 		this.dataDemissao = obj.getDataDemissao();
 		this.salario = obj.getSalario();
 		this.cargo = obj.getCargo().getNome();
+		this.cidade = obj.getEndereco().getCidade().getNome();
 		
 	}
 
