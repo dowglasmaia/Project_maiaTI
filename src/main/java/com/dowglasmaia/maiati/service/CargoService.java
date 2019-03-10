@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dowglasmaia.maiati.domain.Cargo;
+import com.dowglasmaia.maiati.domain.dto.CargoDTO;
 import com.dowglasmaia.maiati.repository.domain.CargoRepository;
 
 @Service
@@ -45,6 +46,24 @@ public class CargoService {
 		dep.setId(id);
 		repository.delete(id);
 
+	}
+
+	/* Update */
+	public Cargo update(Cargo obj) throws Exception {
+		Cargo newObj = buscarPorID(obj.getId());
+		updateData(newObj, obj);
+		return repository.update(newObj);
+
+	}
+
+	/* mtdo aux. para update Cargo */
+	private void updateData(Cargo newObj, Cargo obj) {
+		newObj.setNome(obj.getNome());
+
+	}
+	/* Metodo Auxiliar para Instaciar Uma Cargo Apartir de um DTO */
+	public Cargo fromDTO(CargoDTO objDTO) {
+		return new Cargo (objDTO.getId(), objDTO.getNome(), null);
 	}
 
 }

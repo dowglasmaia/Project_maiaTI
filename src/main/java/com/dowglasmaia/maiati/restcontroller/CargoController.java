@@ -8,13 +8,16 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -58,6 +61,19 @@ public class CargoController {
 
 	}
 
+	/* Endpoint - Update */
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> update(@Valid @RequestBody CargoDTO objDTO, @PathVariable Long id) {
+		Cargo obj = service.fromDTO(objDTO);
+		obj.setId(id);
+		try {			
+			obj = service.update(obj);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.noContent().build();
+	}
+
 	/* Endpoint - Buscar por nome */
 	@GetMapping("lista/{nome}")
 	public ResponseEntity<List<Cargo>> buscarPorNome(@PathVariable String nome) {
@@ -67,10 +83,7 @@ public class CargoController {
 		} catch (Exception e) {
 			throw new NoSuchElementException("Registro não encontrado");
 		}
-
 	}
-	
-	
 
 	/* Endpoint - Delete */
 	@DeleteMapping("/{id}")

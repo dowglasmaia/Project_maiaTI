@@ -3,6 +3,7 @@ package com.dowglasmaia.maiati.domain.dto;
 import java.io.Serializable;
 
 import com.dowglasmaia.maiati.domain.Cargo;
+import com.dowglasmaia.maiati.domain.Departamento;
 
 public class CargoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -11,15 +12,19 @@ public class CargoDTO implements Serializable {
 
 	private String nome;
 
-	private String departamento;
+	private Departamento departamento;
 
-	public CargoDTO() {	}
+	
+	public CargoDTO() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public CargoDTO(Cargo obj) {
 		this.id = obj.getId();
 		this.nome = obj.getNome();
-		this.departamento = obj.getDepartamento().getNome();
+		this.departamento = obj.getDepartamento();
 	}
+
 
 	public Long getId() {
 		return id;
@@ -37,11 +42,11 @@ public class CargoDTO implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getDepartamento() {
+	public Departamento getDepartamento() {
 		return departamento;
 	}
 
-	public void setDepartamento(String departamento) {
+	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
 	}
 
