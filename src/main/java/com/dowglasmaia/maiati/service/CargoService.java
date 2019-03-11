@@ -61,7 +61,7 @@ public class CargoService {
 		newObj.setNome(obj.getNome());
 
 	}
-	/* Metodo Auxiliar para Instaciar Uma Cargo Apartir de um DTO */
+	/* Metodo Auxiliar para Instanciar Uma Cargo Apartir de um DTO */
 	public Cargo fromDTO(CargoDTO objDTO) {
 		return new Cargo (objDTO.getId(), objDTO.getNome(), null);
 	}

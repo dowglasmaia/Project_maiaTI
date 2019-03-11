@@ -47,4 +47,18 @@ public class DepartamentoService {
 
 	}
 
+	/* Update */
+	public Departamento update(Departamento obj) throws Exception {
+		Departamento newObj = buscarPorID(obj.getId());
+		updateData(newObj, obj);
+		return repository.update(newObj);
+
+	}
+
+	/* mtdo aux. para update Departamento */
+	private void updateData(Departamento newObj, Departamento obj) {
+		newObj.setNome(obj.getNome());
+
+	}
+
 }
