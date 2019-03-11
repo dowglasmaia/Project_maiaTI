@@ -10,7 +10,7 @@ import com.dowglasmaia.maiati.domain.Cidade;
 import com.dowglasmaia.maiati.domain.Endereco;
 import com.dowglasmaia.maiati.domain.Estado;
 import com.dowglasmaia.maiati.domain.Funcionario;
-import com.dowglasmaia.maiati.domain.dto.FuncionarioNewDTO;
+import com.dowglasmaia.maiati.domain.func.dto.FuncionarioNewDTO;
 import com.dowglasmaia.maiati.repository.domain.FuncionarioRepository;
 
 @Service
@@ -24,29 +24,29 @@ public class FuncionarioService {
 		return repository.save(obj);
 	}
 
-	/* Salvando o Funcionario e Suas Referencias*/
+	/* Salvando o Funcionario e Suas Referencias */
 	public Funcionario fromDTO(FuncionarioNewDTO objDTO) {
-		
-		Estado uf = objDTO.getEstado();
-		
-		Cargo cg = objDTO.getCargo();
-		
-		Cidade cid = new Cidade(null, objDTO.getCidade(), uf);
-		
-		Endereco end = new Endereco(null, objDTO.getLogradouro(), objDTO.getNumero(), objDTO.getBairro(), objDTO.getCep(), objDTO.getComplemento(), cid);
 
-		Funcionario funcionario = new  Funcionario(null, objDTO.getNome(), objDTO.getEmail(), objDTO.getTelefone(), objDTO.getDataAdmissao(),
-				objDTO.getDataDemissao(), objDTO.getSalario(), cg, end);
-		
-		
+		Estado uf = objDTO.getEstado();
+
+		Cargo cg = objDTO.getCargo();
+
+		Cidade cid = new Cidade(null, objDTO.getCidade(), uf);
+
+		Endereco end = new Endereco(null, objDTO.getLogradouro(), objDTO.getNumero(), objDTO.getBairro(),
+				objDTO.getCep(), objDTO.getComplemento(), cid);
+
+		Funcionario funcionario = new Funcionario(null, objDTO.getNome(), objDTO.getEmail(), objDTO.getTelefone(),
+				objDTO.getDataAdmissao(), objDTO.getDataDemissao(), objDTO.getSalario(), cg, end);
+
 		return funcionario;
 	}
 
 	/* Buscar por ID */
 	public Funcionario buscarPorID(Long id) throws Exception {
-		Funcionario dep = repository.findById(id);
-		if (dep != null) {
-			return dep;
+		Funcionario fun = repository.findById(id);
+		if (fun != null) {
+			return fun;
 		} else {
 			throw new Exception();
 		}
@@ -67,6 +67,28 @@ public class FuncionarioService {
 		Funcionario dep = new Funcionario();
 		dep.setId(id);
 		repository.delete(id);
+
+	}
+
+	/* Update */
+	public Funcionario update(Funcionario obj) throws Exception {
+		Funcionario newObj = buscarPorID(obj.getId());
+		updateData(newObj, obj);
+		return repository.update(newObj);
+
+	}
+
+	/* mtdo aux. para update Funcionario */
+	private void updateData(Funcionario newObj, Funcionario obj) {
+		newObj.setNome(obj.getNome());
+		newObj.setEmail(obj.getEmail());
+		newObj.setSalario(obj.getSalario());
+		newObj.setTelefone(obj.getTelefone());
+		newObj.setDataDemissao(obj.getDataDemissao());
+		newObj.setCargo(obj.getCargo());
+		newObj.setEndereco(new Endereco(obj.getEndereco().getId(), obj.getEndereco().getLogradouro(), obj.getEndereco().getNumero(), obj.getEndereco().getBairro(), 
+				obj.getEndereco().getCep(), obj.getEndereco().getComplemento(), obj.getEndereco().getCidade()));
+		
 
 	}
 

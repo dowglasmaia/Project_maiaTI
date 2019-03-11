@@ -1,4 +1,4 @@
-package com.dowglasmaia.maiati.domain.dto;
+package com.dowglasmaia.maiati.domain.func.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

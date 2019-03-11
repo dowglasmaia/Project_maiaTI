@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -66,11 +67,11 @@ public class Funcionario implements Serializable {
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal salario;
 
-	@NotNull(message = "Campo Obrigatório")
-	@ManyToOne
-	@JsonProperty("funcionarios")
+	@Valid
+	@ManyToOne	
 	private Cargo cargo;
 
+	@Valid
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
 

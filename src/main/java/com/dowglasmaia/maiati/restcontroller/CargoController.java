@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.dowglasmaia.maiati.domain.Cargo;
-import com.dowglasmaia.maiati.domain.dto.CargoDTO;
+import com.dowglasmaia.maiati.domain.cargo.dto.CargoDTO;
 import com.dowglasmaia.maiati.service.CargoService;
 
 @RestController

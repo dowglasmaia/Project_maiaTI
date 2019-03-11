@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dowglasmaia.maiati.domain.Cargo;
-import com.dowglasmaia.maiati.domain.dto.CargoDTO;
+import com.dowglasmaia.maiati.domain.cargo.dto.CargoDTO;
 import com.dowglasmaia.maiati.repository.domain.CargoRepository;
 
 @Service
