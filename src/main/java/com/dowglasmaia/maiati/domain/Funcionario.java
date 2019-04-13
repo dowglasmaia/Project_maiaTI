@@ -23,6 +23,14 @@ import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+<<<<<<< HEAD
+=======
+
+/**
+ * @author Dowglas Maia Skype: live:dowglasmaia E-mail:dowglasmaia@live.com
+ *         Linkedin: www.linkedin.com/in/dowglasmaia
+ */
+>>>>>>> 745d463dce581ebdbd2d1abb3e459145ca255abb
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
