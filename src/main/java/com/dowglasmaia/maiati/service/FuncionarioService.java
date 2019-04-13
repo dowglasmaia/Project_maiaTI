@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.dowglasmaia.maiati.domain.Cargo;
 import com.dowglasmaia.maiati.domain.Cidade;
-import com.dowglasmaia.maiati.domain.Endereco;
 import com.dowglasmaia.maiati.domain.Estado;
 import com.dowglasmaia.maiati.domain.Funcionario;
 import com.dowglasmaia.maiati.domain.func.dto.FuncionarioNewDTO;
@@ -21,23 +20,20 @@ public class FuncionarioService {
 
 	/* Salvar */
 	public Funcionario salvar(Funcionario obj) {
+		obj.setId(null);
 		return repository.save(obj);
+
 	}
 
 	/* Salvando o Funcionario e Suas Referencias */
 	public Funcionario fromDTO(FuncionarioNewDTO objDTO) {
-
 		Estado uf = objDTO.getEstado();
-
 		Cargo cg = objDTO.getCargo();
-
-		Cidade cid = new Cidade(null, objDTO.getCidade(), uf);
-
-		Endereco end = new Endereco(null, objDTO.getLogradouro(), objDTO.getNumero(), objDTO.getBairro(),
-				objDTO.getCep(), objDTO.getComplemento(), cid);
+		Cidade cid = objDTO.getCidade();
 
 		Funcionario funcionario = new Funcionario(null, objDTO.getNome(), objDTO.getEmail(), objDTO.getTelefone(),
-				objDTO.getDataAdmissao(), objDTO.getDataDemissao(), objDTO.getSalario(), cg, end);
+				objDTO.getDataAdmissao(), objDTO.getDataDemissao(), objDTO.getSalario(), objDTO.getLogradouro(),
+				objDTO.getNumero(), objDTO.getBairro(), objDTO.getCep(), objDTO.getComplemento(), cid, uf, cg);
 
 		return funcionario;
 	}
@@ -86,9 +82,13 @@ public class FuncionarioService {
 		newObj.setTelefone(obj.getTelefone());
 		newObj.setDataDemissao(obj.getDataDemissao());
 		newObj.setCargo(obj.getCargo());
-		newObj.setEndereco(new Endereco(obj.getEndereco().getId(), obj.getEndereco().getLogradouro(), obj.getEndereco().getNumero(), obj.getEndereco().getBairro(), 
-				obj.getEndereco().getCep(), obj.getEndereco().getComplemento(), obj.getEndereco().getCidade()));
-		
+		newObj.setBairro(obj.getBairro());
+		newObj.setCep(obj.getCep());
+		newObj.setLogradouro(obj.getLogradouro());
+		newObj.setNumero(obj.getNumero());
+		newObj.setComplemento(obj.getComplemento());
+		newObj.setCidade(obj.getCidade());
+		newObj.setEstado(obj.getEstado());
 
 	}
 

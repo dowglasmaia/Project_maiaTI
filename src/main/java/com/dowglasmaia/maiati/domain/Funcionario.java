@@ -3,18 +3,15 @@ package com.dowglasmaia.maiati.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -25,14 +22,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-/**
- * @author Dowglas Maia Skype: live:dowglasmaia E-mail:dowglasmaia@live.com
- *         Linkedin: www.linkedin.com/in/dowglasmaia
- */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
@@ -67,25 +57,43 @@ public class Funcionario implements Serializable {
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal salario;
 
-	@Valid
-	@ManyToOne	
-	private Cargo cargo;
+	@NotBlank(message = "Campo Obrogatório")
+	@Column(length = 50, nullable = false)
+	private String logradouro;
+
+	@NotBlank(message = "Campo Obrogatório")
+	@Column(length = 10, nullable = false)
+	private String numero;
+
+	@NotBlank(message = "Campo Obrogatório")
+	@Column(length = 50, nullable = false)
+	private String bairro;
+
+	@NotBlank(message = "Campo Obrogatório")
+	@Column(length = 12, nullable = false)
+	private String cep;
+
+	@Column(length = 50)
+	private String complemento;
 
 	@Valid
 	@ManyToOne(cascade = CascadeType.ALL)
-	private Endereco endereco;
+	private Cidade cidade;
+
+	@ManyToOne
+	private Estado estado;
+
+	@Valid
+	@ManyToOne
+	private Cargo cargo;
 
 	public Funcionario() {
 		// TODO Auto-generated constructor stub
 	}
 
-
-
-	public Funcionario(Long id, @NotBlank(message = "Campo Obrogatório") String nome,
-			@NotBlank(message = "Campo Obrogatório") @Email String email,
-			@NotBlank(message = "Campo Obrogatório") String telefone, Date dataAdmissao, Date dataDemissao,
-			@NotNull(message = "Campo Obrogatório") BigDecimal salario,
-			@NotNull(message = "Campo Obrogatório") Cargo cargo, Endereco endereco) {
+	public Funcionario(Long id, String nome, String email, String telefone, Date dataAdmissao, Date dataDemissao,
+			BigDecimal salario, String logradouro, String numero, String bairro, String cep, String complemento,
+			Cidade cidade, Estado estado, Cargo cargo) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -94,11 +102,15 @@ public class Funcionario implements Serializable {
 		this.dataAdmissao = dataAdmissao;
 		this.dataDemissao = dataDemissao;
 		this.salario = salario;
+		this.logradouro = logradouro;
+		this.numero = numero;
+		this.bairro = bairro;
+		this.cep = cep;
+		this.complemento = complemento;
+		this.cidade = cidade;
+		this.estado = estado;
 		this.cargo = cargo;
-		this.endereco = endereco;
 	}
-
-
 
 	// ======== Getters e Setters ================//
 	public Long getId() {
@@ -149,12 +161,60 @@ public class Funcionario implements Serializable {
 		this.cargo = cargo;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+	public String getLogradouro() {
+		return logradouro;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 	public String getEmail() {

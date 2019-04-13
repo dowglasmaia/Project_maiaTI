@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import com.dowglasmaia.maiati.domain.Cargo;
+import com.dowglasmaia.maiati.domain.Cidade;
 import com.dowglasmaia.maiati.domain.Estado;
 
 
@@ -35,7 +36,7 @@ public class FuncionarioNewDTO implements Serializable {
 
 	private String complemento;
 
-	private String cidade;
+	private Cidade cidade;
 
 	private Cargo cargo;
 
@@ -159,11 +160,11 @@ public class FuncionarioNewDTO implements Serializable {
 		this.complemento = complemento;
 	}
 
-	public String getCidade() {
+	public Cidade getCidade() {
 		return cidade;
 	}
 
-	public void setCidade(String cidade) {
+	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
 

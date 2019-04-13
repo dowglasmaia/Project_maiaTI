@@ -28,22 +28,25 @@ public class Estado implements Serializable {
 	@Column(length = 50, nullable = false, unique = true)
 	private String sigla;
 
-	@NotBlank(message = "Informe a UF do Estado")
+	@NotBlank(message = "Informe o nome do Estado")
 	@Column(length = 50, nullable = false)
 	private String nome;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "estado")
-	private List<Cidade> cidades = new ArrayList<>();
+	private List<Funcionario> funcionarios = new ArrayList<>();
 
 	public Estado() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Estado(Long id, String sigla, String nome) {
+	public Estado(Long id, @NotBlank(message = "Informe a UF do Estado") String sigla,
+			@NotBlank(message = "Informe o nome do Estado") String nome) {
+		super();
 		this.id = id;
 		this.sigla = sigla;
 		this.nome = nome;
+
 	}
 
 	public Long getId() {
@@ -70,37 +73,8 @@ public class Estado implements Serializable {
 		this.nome = nome;
 	}
 
-	public List<Cidade> getCidades() {
-		return cidades;
-	}
-
-	public void setCidades(List<Cidade> cidades) {
-		this.cidades = cidades;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Estado other = (Estado) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
 	}
 
 }

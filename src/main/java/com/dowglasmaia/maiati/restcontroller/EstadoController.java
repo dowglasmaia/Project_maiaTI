@@ -14,10 +14,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.dowglasmaia.maiati.domain.Cidade;
 import com.dowglasmaia.maiati.domain.Estado;
+import com.dowglasmaia.maiati.service.CidadeService;
 import com.dowglasmaia.maiati.service.EstadoService;
 
 @RestController
@@ -26,6 +29,9 @@ public class EstadoController {
 
 	@Autowired
 	private EstadoService service;
+
+	@Autowired
+	private CidadeService cidService;
 
 	/* Endpoint - Listar Todos */
 	@GetMapping
@@ -67,14 +73,18 @@ public class EstadoController {
 
 	}
 
-	/* Endpoint - Delete */
-	@DeleteMapping("/{id}")
-	public void delete(@PathVariable Long id) {
+	/* Endpoint - Cidades com Base no ID do seu Estado */
+	@RequestMapping(value = "/{estadoId}/cidades", method = RequestMethod.GET)
+	public ResponseEntity<List<Cidade>> findCidades(@PathVariable Long estadoId) {
+		List<Cidade> list;
 		try {
-			service.remove(id);
+			list = cidService.buscarPorNome(estadoId);
+			return ResponseEntity.ok().body(list);
 		} catch (Exception e) {
-			throw new NoSuchElementException("O Operação Não realizada!");
+			e.printStackTrace();
+			return null;
 		}
+
 	}
 
 }
