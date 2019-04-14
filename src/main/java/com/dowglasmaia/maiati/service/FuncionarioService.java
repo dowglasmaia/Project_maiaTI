@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.dowglasmaia.maiati.domain.Cargo;
 import com.dowglasmaia.maiati.domain.Cidade;
+import com.dowglasmaia.maiati.domain.Departamento;
 import com.dowglasmaia.maiati.domain.Estado;
 import com.dowglasmaia.maiati.domain.Funcionario;
 import com.dowglasmaia.maiati.domain.func.dto.FuncionarioNewDTO;
@@ -27,6 +28,8 @@ public class FuncionarioService {
 
 	/* Salvando o Funcionario e Suas Referencias */
 	public Funcionario fromDTO(FuncionarioNewDTO objDTO) {
+		//Departamento dp = new Departamento(null, objDTO.getCargo().getDepartamento());
+		
 		Estado uf = objDTO.getEstado();
 		Cargo cg = objDTO.getCargo();
 		Cidade cid = objDTO.getCidade();

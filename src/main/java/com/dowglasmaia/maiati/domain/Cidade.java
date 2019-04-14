@@ -25,8 +25,7 @@ public class Cidade implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "Informe o Nome da Cidade")
-	@Size(min = 3, max = 50, message = "A sigla do Estado deve ter entre {min} e {max} caracteres.")
+	@NotBlank(message = "Informe o Nome da Cidade")	
 	@Column(length = 50, nullable = false)
 	private String nome;
 
@@ -38,7 +37,7 @@ public class Cidade implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cidade(Long id, String nome) {
+	public Cidade(Long id, String nome ) {
 		super();
 		this.id = id;
 		this.nome = nome;

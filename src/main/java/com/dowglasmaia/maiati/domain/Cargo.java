@@ -28,7 +28,7 @@ public class Cargo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Size(min = 3, max = 60, message = "O nome do Cargo deve ter entre {min} e {max} caracteres.")
+	@Size(min = 2, max = 60, message = "O nome do Cargo deve ter entre {min} e {max} caracteres.")
 	@Column(length = 50, nullable = false, unique = true)
 	private String nome;
 

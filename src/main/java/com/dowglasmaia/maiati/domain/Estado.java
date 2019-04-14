@@ -25,7 +25,7 @@ public class Estado implements Serializable {
 	private Long id;
 
 	@NotBlank(message = "Informe a UF do Estado")
-	@Column(length = 50, nullable = false, unique = true)
+	@Column(length = 50, nullable = false)
 	private String sigla;
 
 	@NotBlank(message = "Informe o nome do Estado")
@@ -40,8 +40,8 @@ public class Estado implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Estado(Long id, @NotBlank(message = "Informe a UF do Estado") String sigla,
-			@NotBlank(message = "Informe o nome do Estado") String nome) {
+	public Estado(Long id, String sigla,
+			 String nome) {
 		super();
 		this.id = id;
 		this.sigla = sigla;

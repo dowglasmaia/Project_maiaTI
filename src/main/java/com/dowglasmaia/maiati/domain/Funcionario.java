@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,14 +22,13 @@ import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-<<<<<<< HEAD
-=======
 
 /**
- * @author Dowglas Maia Skype: live:dowglasmaia E-mail:dowglasmaia@live.com
- *         Linkedin: www.linkedin.com/in/dowglasmaia
+ * @author Dowglas Maia 
+ * Skype: live:dowglasmaia 
+ * E-mail:dowglasmaia@live.com
+ *  Linkedin: www.linkedin.com/in/dowglasmaia
  */
->>>>>>> 745d463dce581ebdbd2d1abb3e459145ca255abb
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
@@ -84,8 +82,8 @@ public class Funcionario implements Serializable {
 	@Column(length = 50)
 	private String complemento;
 
-	@Valid
-	@ManyToOne(cascade = CascadeType.ALL)
+	
+	@ManyToOne
 	private Cidade cidade;
 
 	@ManyToOne
